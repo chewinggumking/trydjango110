@@ -13,7 +13,7 @@ class KirrURL(models.Model):
         super (KirrURL, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.url,)
+        return str(self.url)
 
     def __unicode__(self):
         return str(self.url)
