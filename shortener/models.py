@@ -2,7 +2,7 @@ import random
 import string
 from django.db import models
 
-
+#"TD110 15-50 start"
 # Create your models here.
 
 def code_generator(size=6, chars=string.ascii_lowercase + string.digits):
