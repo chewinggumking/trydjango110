@@ -4,7 +4,7 @@ from django.db import models
 #Utilities
 from .utils import code_generator, create_shortcode
 
-#"TD110 15-50 start"
+
 # Create your models here.
 
 
