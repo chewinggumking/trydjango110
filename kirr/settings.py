@@ -25,7 +25,7 @@ SECRET_KEY = '$8jy4t9__*o%^^+#+=yyohitg_29k=3v6fy^e&9fq&a*c__s_n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tirr.com', 'www.tirr.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third Part APPS
+    'django_hosts',
 
     #custom app
     'shortener',
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,9 +53,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'kirr.urls'
+ROOT_HOSTCONF = 'kirr.hosts'
+DEFAULT_HOST = 'www'
+DEFAULT_REDIRECT_URL = "http://www.tirr.com:8000"
 
 TEMPLATES = [
     {
@@ -121,5 +128,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-SHORTCODE_MAX = 10
-SHORTCODE_MIN = 4
+SHORTCODE_MAX = 15
+SHORTCODE_MIN = 6
