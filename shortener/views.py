@@ -4,13 +4,19 @@ from django.views import View
 
 from .models import KirrURL
 # Create your views here.
-def kirr_redirect_view(request,shortcode=None, *args, **kwargs):
-    print (shortcode)
-    obj = get_object_or_404(KirrURL, shortcode=shortcode)
-    print(obj.shortcode)
-    return HttpResponseRedirect(obj.url)
 
 
+class HomeView(View):
+    def get (self, request, *args, **kwargs):
+        return render (request, "shortener/home.html", {})
+
+    def post (self, request, *args, **kwargs):
+        some_dict = {}
+        # some_dict['url']
+        some_dict.get('url', 'http>//joincfe.com')
+        print (request.POST)
+        print (request.POST.get("url"))
+        return render (request, "shortener/home.html", {})
 
 class KirrCBView(View):
     def get (self, request,shortcode=None, *args, **kwargs):
@@ -34,4 +40,11 @@ def kirr_redirect_view(request,shortcode=None, *args, **kwargs):
     #     obj = qs.first()
     #     obj_url=obj.url
     return HttpResponse("Hello {sc}".format(sc=obj.url))
+
+def kirr_redirect_view(request,shortcode=None, *args, **kwargs):
+    print (shortcode)
+    obj = get_object_or_404(KirrURL, shortcode=shortcode)
+    print(obj.shortcode)
+    return HttpResponseRedirect(obj.url)
+
  '''
