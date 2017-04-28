@@ -3,20 +3,30 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from .models import KirrURL
+from .forms import SubmitUrlForm
 # Create your views here.
 
 
 class HomeView(View):
     def get (self, request, *args, **kwargs):
-        return render (request, "shortener/home.html", {})
+        the_form = SubmitUrlForm()
+        context = {
+            "title" : "KIRR.CO",
+            "form" : the_form,
+
+        }
+        return render (request, "shortener/home.html", context)
 
     def post (self, request, *args, **kwargs):
-        some_dict = {}
-        # some_dict['url']
-        some_dict.get('url', 'http>//joincfe.com')
-        print (request.POST)
-        print (request.POST.get("url"))
-        return render (request, "shortener/home.html", {})
+        form = SubmitUrlForm(request.POST)
+        if form.is_valid():
+            print (form.cleaned_data)
+        context = {
+            "form" : form,
+            "title" : "KIRR.CO",
+
+        }
+        return render (request, "shortener/home.html", context)
 
 class KirrCBView(View):
     def get (self, request,shortcode=None, *args, **kwargs):
