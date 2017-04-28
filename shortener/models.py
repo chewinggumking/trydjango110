@@ -3,6 +3,7 @@ from django.db import models
 
 #Utilities
 from .utils import code_generator, create_shortcode
+from .validators import validate_url, validate_dot_com
 
 SHORTCODE_MAX = getattr (settings, "SHORTCODE_MAX", 15)
 # Create your models here.
@@ -28,7 +29,7 @@ class KirrURLManager(models.Manager):
 
 
 class KirrURL(models.Model):
-    url = models.CharField(max_length = 220,)
+    url = models.CharField(max_length = 220, validators = [validate_url, validate_dot_com])
     shortcode =  models.CharField(max_length = SHORTCODE_MAX, unique = True, blank=True,)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
