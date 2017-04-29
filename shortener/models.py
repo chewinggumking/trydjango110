@@ -1,5 +1,8 @@
 from django.conf import settings
 from django.db import models
+from django.core.urlresolvers import reverse
+
+from django_hosts.resolvers import reverse
 
 #Utilities
 from .utils import code_generator, create_shortcode
@@ -22,7 +25,6 @@ class KirrURLManager(models.Manager):
         new_codes = 0
         for q in qs:
             q.shortcode = create_shortcode(q)
-            print (q.id)
             q.save()
             new_codes += 1
         return "New codes made: {i}".format(i=new_codes)
@@ -48,3 +50,7 @@ class KirrURL(models.Model):
 
     def __unicode__(self):
         return str(self.url)
+
+    def get_short_url(self):
+        url_path = reverse("scode", kwargs={"shortcode":self.shortcode}, host = "www", scheme = "http", )
+        return url_path
