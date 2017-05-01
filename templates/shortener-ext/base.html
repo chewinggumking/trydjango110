@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="http://getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
 
+    {% block styles %}
+    <style>
+    body {
+      background-color: #226268;
+    
+
+    }
+    .btn-link{
+      color: #50dfec;
+      text-shadow: none;
+    }
+    .btn-link:hover{
+      color: #d7f112
+    }
+    </style>
+    {% endblock styles %}
+
   </head>
 
       <body>
@@ -23,10 +40,10 @@
            {% block content %}
            {% endblock content %}
 
-           
+
          </div>
 
-
+<!--  -->
 
        </div>
 

@@ -2,14 +2,16 @@ from django import forms
 
 from django.core.validators import URLValidator
 
-from .validators import validate_url, validate_dot_com
+from .validators import validate_url
 
 class SubmitUrlForm(forms.Form):
     url = forms.CharField(
             label = "",
             validators=[validate_url],
-            widget = forms.TextInput(attrs={"placeholder":"Long URL",
-            "class":"form-control"}
+            widget = forms.TextInput(
+                attrs={
+                "placeholder":"Long URL",
+                "class":"form-control"}
                 )
             )
 
@@ -28,11 +30,6 @@ class SubmitUrlForm(forms.Form):
 
     # def clean_url(self):
     #     url = self.cleaned_data['url']
-    #
-    #     # print (url)
-    #     # url_validator = URLValidator()
-    #     # try:
-    #     #     url_validator(url)
-    #     # except:
-    #     #     raise forms.ValidationError("Invalid URL or this field.")
-    #     return url
+    #     if "http" in url:
+    #         return url
+    #     return "http://" + url

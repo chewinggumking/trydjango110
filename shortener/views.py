@@ -12,6 +12,7 @@ from analytics.models import ClickEvent
 class HomeView(View):
     def get (self, request, *args, **kwargs):
         the_form = SubmitUrlForm()
+        bg_image = ""
         context = {
             "title" : "KIRR.CO",
             "form" : the_form,
@@ -28,10 +29,8 @@ class HomeView(View):
         }
         template = "shortener/home.html"
         if form.is_valid():
-            print (form.cleaned_data)
             new_url = form.cleaned_data.get("url")
             obj, created = KirrURL.objects.get_or_create(url=new_url)
-            print (created)
             context = {
                 "object" : obj,
                 "created" : created
@@ -46,11 +45,11 @@ class HomeView(View):
 
 class URLRedirectView(View):
     def get (self, request, shortcode=None, *args, **kwargs):
+        print ("REQUEST= ", request)
         qs = KirrURL.objects.filter(shortcode__iexact=shortcode)
         if qs.count()!=1 and not qs.exists():
             raise Http404
         obj = qs.first()
-        print (ClickEvent.objects.create_event(obj))
         return HttpResponseRedirect(obj.url)
 
 

@@ -1,15 +1,27 @@
 {% extends "base.html" %}
+
+{% block styles %}
+<style>
+body {
+    background-image: url('https://images.contentful.com/6m9bd13t776q/4bqBCTLlGowyYWScIyOu0g/8f85ffd8a8e834531dac7b222a1c2d6c/big-boobs-breastfeeding-bra-2160x1200.jpg?q=75');
+    background-size: cover;
+}
+</style>
+
+{% endblock styles %}
+
 {% block content %}
 
 <h1 class="cover-heading">{{title}}</h1>
-
+      <p class="lead">Shorten that URL</p>
           <p class="lead">
-                <div class = ' col-sm-6 col-sm-offset-3 '>
+
+              <div class = ' col-sm-6 col-sm-offset-3 '>
                 <form method="POST" action= "."> {% csrf_token %}
                 {{form.as_p}}
-                <input class = 'btn btn-primary' type="submit" value="Shorten" />
+                <input class = 'btn btn-primary' type="submit" value="Shorten &raquo" />
                 </form>
-                </div>
+              </div>
 
           </p>
 
