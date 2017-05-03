@@ -12,7 +12,6 @@ def validate_url(value):
         url_validator(new_value)
     except:
         raise ValidationError("Invalid URL f or this field.")
-    print ("NEW VALUE=", new_value)
     return new_value
 
 def validate_dot_com(value):

@@ -45,7 +45,6 @@ class HomeView(View):
 
 class URLRedirectView(View):
     def get (self, request, shortcode=None, *args, **kwargs):
-        print ("REQUEST= ", request)
         qs = KirrURL.objects.filter(shortcode__iexact=shortcode)
         if qs.count()!=1 and not qs.exists():
             raise Http404
