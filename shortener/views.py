@@ -30,6 +30,8 @@ class HomeView(View):
         template = "shortener/home.html"
         if form.is_valid():
             new_url = form.cleaned_data.get("url")
+            if not "http" in new_url:
+                new_url = "http://" + new_url
             obj, created = KirrURL.objects.get_or_create(url=new_url)
             context = {
                 "object" : obj,
@@ -49,6 +51,7 @@ class URLRedirectView(View):
         if qs.count()!=1 and not qs.exists():
             raise Http404
         obj = qs.first()
+        ClickEvent.objects.create_event(obj)
         return HttpResponseRedirect(obj.url)
 
 
